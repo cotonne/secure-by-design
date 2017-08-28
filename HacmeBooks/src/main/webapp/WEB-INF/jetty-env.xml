@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg></Arg>
+        <Arg>jdbc/HacmeBooks</Arg>
+        <Arg>
+            <New class="org.hsqldb.jdbc.JDBCDataSource">
+                <Set name="Url">jdbc:hsqldb:mem:mydb</Set>
+                <Set name="User">user</Set>
+                <Set name="Password">password</Set>
+            </New>
+        </Arg>
+    </New>
+    <Get name="securityHandler">
+        <!-- Either: -->
+        <Set name="loginService">
+            <New class="org.eclipse.jetty.security.HashLoginService">
+                <Set name="name">My Friendly App</Set>
+                <Set name="config">
+                    <SystemProperty name="jetty.home" default="."/>/WEB-INF/realm.properties
+                </Set>
+            </New>
+        </Set>
+
+        <!-- or if you defined a LoginService called "Test Realm" in jetty.xml : -->
+        <!--<Set name="realmName">Test Realm</Set>-->
+
+    </Get>
+</Configure>

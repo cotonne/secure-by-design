@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+  <!-- ========== Data Sources Definitions =================================== -->
+  <!--
+    Define your Struts data sources in a file called struts-data-sources.xml and place
+    it in your merge directory.
+  -->
+
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+
+    <form-bean
+      name="feedbackForm"
+      type="com.foundstone.s3i.webapp.form.FeedbackForm"
+    />
+    <form-bean
+      name="customerOrderForm"
+      type="com.foundstone.s3i.webapp.form.CustomerOrderForm"
+    />
+    <form-bean
+      name="customerOrderItemForm"
+      type="com.foundstone.s3i.webapp.form.CustomerOrderItemForm"
+    />
+    <form-bean
+      name="productForm"
+      type="com.foundstone.s3i.webapp.form.ProductForm"
+    />
+    <form-bean
+      name="roleForm"
+      type="com.foundstone.s3i.webapp.form.RoleForm"
+    />
+    <form-bean
+      name="uploadForm"
+      type="com.foundstone.s3i.webapp.form.UploadForm"
+    />
+    <form-bean
+      name="addressForm"
+      type="com.foundstone.s3i.webapp.form.AddressForm"
+    />
+    <form-bean
+      name="userForm"
+      type="com.foundstone.s3i.webapp.form.UserForm"
+    />
+
+    <!--
+         If you have non XDoclet forms, define them in a file called struts-forms.xml and
+         place it in your merge directory.
+    -->
+  </form-beans>
+
+  <!-- ========== Global Exceptions Definitions =================================== -->
+      <global-exceptions>
+        <exception type="java.lang.Exception"
+            key="errors.general"
+            handler="com.foundstone.s3i.webapp.action.ActionExceptionHandler"/>
+    </global-exceptions>
+
+  <!-- ========== Global Forward Definitions =================================== -->
+      <global-forwards>
+        <!-- Default forward to "mainMenu" action -->
+        <!-- Demonstrates using index.jsp to forward -->
+        <forward name="mainMenu" path="/mainMenu.html" redirect="true"/>
+        <!-- Forwards specified in actions -->        
+        <forward name="addUser" 
+            path="/editUser.html?method=Add&amp;from=list" redirect="true"/>
+        <forward name="cancelUser" path="/editUser.html?method=Cancel"/>
+        <forward name="deleteUser" path="/editUser.html?method=Delete"/>
+        <forward name="updateUser" path="/userProfile.html"/>
+        <forward name="shoppingCart" path="/shoppingCart.html"/>
+        <forward name="browseBooks" path="/browseBooks.html"/>
+        <!-- Forwards for links used in Menu -->
+        <forward name="editProfile" path="/editProfile.html"/>
+        <!-- The 'editUser' forward is protected so only admins can use it -->
+        <forward name="editUser" path="/editUser.html"/>
+        <forward name="viewUsers" path="/editUser.html?method=Search"/>
+        <forward name="selectFile" path="/selectFile.html"/>
+
+        <!-- Logout by forward to a JSP, I do this b/c if I forward to an 
+             an action, and the users session is expired - they'll be prompted
+             to login - just to logout!  Seems silly to me.
+        -->
+        <forward name="logout" path="/logout.jsp"/>
+    </global-forwards>
+
+  <!-- ========== Action Mapping Definitions =================================== -->
+   <action-mappings>
+    <action
+      path="/bookDetails"
+      type="com.foundstone.s3i.webapp.action.BookDetailsAction"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/productDetails.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/uploadFile"
+      type="com.foundstone.s3i.webapp.action.UploadAction"
+      name="uploadForm"
+      scope="request"
+      input="failure"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="failure"
+        path="/WEB-INF/pages/uploadForm.jsp"
+        redirect="false"
+      />
+      <forward
+        name="success"
+        path="/WEB-INF/pages/uploadDisplay.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/users"
+      type="com.foundstone.s3i.webapp.action.UserAction"
+      name="userForm"
+      scope="request"
+      input="mainMenu"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/userList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/userProfile.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/editUser"
+      type="com.foundstone.s3i.webapp.action.UserAction"
+      name="userForm"
+      scope="request"
+      input="list"
+      roles="admin"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/userList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/userProfile.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/editProfile"
+      type="com.foundstone.s3i.webapp.action.UserAction"
+      name="userForm"
+      scope="request"
+      input="mainMenu"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/userList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/userProfile.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/saveUser"
+      type="com.foundstone.s3i.webapp.action.UserAction"
+      name="userForm"
+      scope="request"
+      input="edit"
+      parameter="method"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/userList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="edit"
+        path="/WEB-INF/pages/userProfile.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/browseOrders"
+      type="com.foundstone.s3i.webapp.action.BrowseOrdersAction"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/orderList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/reviewCheckout"
+      type="com.foundstone.s3i.webapp.action.CheckoutAction"
+      name="customerOrderForm"
+      scope="request"
+      input="mainMenu"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/checkoutList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="receipt"
+        path="/WEB-INF/pages/receipt.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/approveCheckout"
+      type="com.foundstone.s3i.webapp.action.CheckoutAction"
+      name="customerOrderForm"
+      scope="request"
+      input="reviewCheckout.html"
+      parameter="method"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/checkoutList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="receipt"
+        path="/WEB-INF/pages/receipt.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/searchBooks"
+      type="com.foundstone.s3i.webapp.action.SearchBooksAction"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/productList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/foo"
+      type="com.foundstone.s3i.webapp.action.DummyBookActionMainPage"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/login.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/viewShoppingCart"
+      type="com.foundstone.s3i.webapp.action.ShoppingCartAction"
+      name="customerOrderForm"
+      scope="request"
+      input="mainMenu"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/shoppingCartList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/addShoppingCart"
+      type="com.foundstone.s3i.webapp.action.ShoppingCartAction"
+      name="customerOrderForm"
+      scope="request"
+      input="browseBooks"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/shoppingCartList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/deleteShoppingCart"
+      type="com.foundstone.s3i.webapp.action.ShoppingCartAction"
+      name="customerOrderForm"
+      scope="request"
+      input="browseBooks"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/shoppingCartList.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/feedback"
+      type="com.foundstone.s3i.webapp.action.FeedbackAction"
+      name="feedbackForm"
+      scope="request"
+      input="bookDetails.html"
+      parameter="method"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="list"
+        path="/WEB-INF/pages/productDetails.jsp"
+        redirect="false"
+      />
+      <forward
+        name="receipt"
+        path="/WEB-INF/pages/receipt.jsp"
+        redirect="false"
+      />
+      <forward
+        name="browseBooks"
+        path="/browseBooks.html"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/signup"
+      type="com.foundstone.s3i.webapp.action.SignupAction"
+      name="userForm"
+      scope="request"
+      input="failure"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="failure"
+        path="/WEB-INF/pages/signup.jsp"
+        redirect="false"
+      />
+      <forward
+        name="success"
+        path="/mainMenu.html"
+        redirect="true"
+      />
+    </action>
+    <action
+      path="/browseBooks"
+      type="com.foundstone.s3i.webapp.action.BrowseBooksAction"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/productList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/mainMenu"
+      type="com.foundstone.s3i.webapp.action.BookActionMainPage"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="list"
+        path="/WEB-INF/pages/mainMenu.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
+      path="/reload"
+      type="com.foundstone.s3i.webapp.action.ReloadAction"
+      roles="admin"
+      unknown="false"
+      validate="false"
+    >
+    </action>
+    <action
+      path="/passwordHint"
+      type="com.foundstone.s3i.webapp.action.PasswordHintAction"
+      unknown="false"
+      validate="false"
+    >
+      <forward
+        name="previousPage"
+        path="/"
+        redirect="false"
+      />
+      <forward
+        name="hintPage"
+        path="/WEB-INF/pages/showHint.jsp"
+        redirect="false"
+      />
+      <forward
+        name="enterHint"
+        path="/WEB-INF/pages/enterHint.jsp"
+        redirect="false"
+      />
+    </action>
+
+       <!-- Forwards to the mainMenu tile definition -->
+    <!-- <action path="/mainMenu" type="org.apache.struts.actions.ForwardAction"
+        parameter="/WEB-INF/pages/mainMenu.jsp"/> -->
+
+    <!-- Action to flush cache -->
+    <action path="/flush" type="org.apache.struts.actions.ForwardAction"
+        parameter="/WEB-INF/pages/flushCache.jsp" roles="admin"/>
+
+	<!-- Forward to page to begin file upload -->
+    <action path="/selectFile" type="org.apache.struts.actions.ForwardAction"
+        parameter="/WEB-INF/pages/uploadForm.jsp"/>
+    <!-- Forward to view Active Users -->
+    <action path="/activeUsers" type="org.apache.struts.actions.ForwardAction"
+        parameter="/WEB-INF/pages/activeUsers.jsp" roles="admin"/>
+
+  </action-mappings>
+
+  <controller nocache="true" inputForward="true" maxFileSize="2M"/>
+
+      <message-resources parameter="ApplicationResources"/>
+
+      <!-- ========== Validator plugin ===================  -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames" 
+                      value="/WEB-INF/validator-rules.xml,
+                             /WEB-INF/validator-rules-custom.xml,
+                             /WEB-INF/validation.xml"/>
+    </plug-in>
+    <!-- ========== Menu plugin ======================== -->
+    <plug-in className="net.sf.navigator.menu.MenuPlugIn"/>
+
+</struts-config>
