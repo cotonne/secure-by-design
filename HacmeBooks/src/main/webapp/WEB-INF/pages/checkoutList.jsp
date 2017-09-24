@@ -72,7 +72,7 @@
     </tr>
     <tr>
         <th>
-            <div class="checkoutForm">Promotional Code (recieve 10-50% off)</div>
+            <div class="checkoutForm">Promotional Code (receive 10-50% off)</div>
         </th>
         <td>
             <html:text property="magicCoupon" size="16"

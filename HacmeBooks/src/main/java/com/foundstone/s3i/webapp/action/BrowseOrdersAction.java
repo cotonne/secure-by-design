@@ -17,47 +17,47 @@ import com.foundstone.s3i.service.CustomerOrderManager;
 
 /**
  * Action class to browse books.
- * 
- * 
+ *
  * @struts.action path="/browseOrders" validate="false"
  * @struts.action-forward name="previousPage" path="/"
- * 
  * @struts.action-forward name="list" path="/WEB-INF/pages/orderList.jsp"
  */
 public final class BrowseOrdersAction extends BaseAction {
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+    public ActionForward execute(ActionMapping mapping, ActionForm form,
+                                 HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
 
-		CustomerOrderManager orderMgr = (CustomerOrderManager) getBean("customerOrderManager");
-		String parameter = "";
-		parameter = request.getParameter("userId");
-		User user = new User();
-		
-		//For testing purposes.  To be removed...
-		if (parameter != null && parameter.length() > 0) {
-			user.setUsername(parameter);
-		} else {
-			user.setUsername(request.getUserPrincipal().getName());
-		}
-		//HttpSession session =request.getSession();
-		//UserForm userForm =
-		// (UserForm)session.getAttribute(Constants.USER_KEY);
+        CustomerOrderManager orderMgr = (CustomerOrderManager) getBean("customerOrderManager");
+        String parameter = "";
+        parameter = request.getParameter("userId");
+        User user = new User();
 
-		//user.setUsername(userForm.getUsername());
+        //For testing purposes.  To be removed...
+        if (parameter != null && parameter.length() > 0) {
+            log.info("Retrieving order for " + parameter);
+            user.setUsername(parameter);
+        } else {
+            log.info("Retrieving order from request " + request.getUserPrincipal().getName());
+            user.setUsername(request.getUserPrincipal().getName());
+        }
+        //HttpSession session =request.getSession();
+        //UserForm userForm =
+        // (UserForm)session.getAttribute(Constants.USER_KEY);
 
-		List orders = orderMgr.getCustomerOrdersByUser(user);
-		if (orders == null || orders.size() == 0) {
-			ActionMessages messages = new ActionMessages();
-			messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
-					"orders.missing"));
-			saveMessages(request.getSession(), messages);
-			return mapping.findForward("mainMenu");
-		}
-		request.setAttribute(Constants.ORDER_LIST, orders);
+        //user.setUsername(userForm.getUsername());
 
-		return mapping.findForward("list");
+        List orders = orderMgr.getCustomerOrdersByUser(user);
+        if (orders == null || orders.size() == 0) {
+            ActionMessages messages = new ActionMessages();
+            messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage(
+                    "orders.missing"));
+            saveMessages(request.getSession(), messages);
+            return mapping.findForward("mainMenu");
+        }
+        request.setAttribute(Constants.ORDER_LIST, orders);
 
-	}
+        return mapping.findForward("list");
+
+    }
 }

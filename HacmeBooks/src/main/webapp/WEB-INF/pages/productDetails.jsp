@@ -51,7 +51,7 @@
    <tr><td>(You must be logged in to leave feedback)<br/><br/></td></tr>
  </c:if>
  <c:forEach var="feedbackItem" items="${product.feedback}" >
-  <tr><td><hr><c:out value="${feedbackItem.feedback}"/></td></tr>
+  <tr><td><hr><c:out value="${feedbackItem.feedback}" escapeXml="false"/></td></tr>
  </c:forEach> 
 </table>
 

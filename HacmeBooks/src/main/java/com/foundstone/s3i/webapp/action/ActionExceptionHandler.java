@@ -86,14 +86,14 @@ public final class ActionExceptionHandler extends ExceptionHandler {
             StringWriter sw = new StringWriter();
             ex.printStackTrace(new PrintWriter(sw));
             error = new ActionMessage("errors.detail", sw.toString());
-            System.out.println("Here is what I am seeing beofre storing: " + sw.toString());
+            System.out.println("Here is what I am seeing before storing: " + sw.toString());
             property = error.getKey();
             ex = (Exception) ex.getCause();
 
             if ((ex != null) && (ex.getMessage() != null)) {
                 // check to see if the child message is the same
                 // if so, don't store it
-                if (msg.indexOf(ex.getMessage()) == -1) {
+                if (!msg.contains(ex.getMessage())) {
                     storeException(request, property, error, forward);
                 } else {
                 	storeException(request, property, error, forward);

@@ -86,8 +86,8 @@
         </property>
     </bean>
     <bean name="paymentManager" class="com.foundstone.s3i.service.impl.PaymentManagerWS">
-        <property name="accountURL"><value>http://localhost/HacmeBank_v2_WS/WebServices/AccountManagement.asmx</value></property>
-        <property name="userURL"><value>http://localhost/HacmeBank_v2_WS/WebServices/UserManagement.asmx</value></property>
+        <property name="accountURL"><value>http://localhost:8989/HacmeBank_v2_WS/WebServices/AccountManagement.asmx</value></property>
+        <property name="userURL"><value>http://localhost:8989/HacmeBank_v2_WS/WebServices/UserManagement.asmx</value></property>
         <property name="hacmeBankLogin"><value>hacmebooks</value></property>
         <property name="hacmeBankPassword"><value>password</value></property>
         <property name="hacmeBankAccountNumber"><value>112233445566</value></property>
