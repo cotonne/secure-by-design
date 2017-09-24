@@ -1,3 +1,13 @@
+TL;DR
+==============
+
+  1. Install hsqldb
+  2. run it : $ java -cp hsqldb.jar org.hsqldb.server.Server --database.0 file:mydb --dbname.0 xdb
+  3. run HacmeBooks : $ mvn -DskipTests -Dmaven.test.skip -Djetty.http.port=8989 clean jetty:run
+
+Porting
+==============
+
 Some voodoo things and magic tricks...
 
 The hacme books project is now under maven with "modern libraries".
@@ -11,7 +21,7 @@ To build :
     $ mvn package -DskipTests -Dmaven.test.skip
 
 To run :
-    $ mvn -Djetty.http.port=8989 jetty:run
+    $ mvn -DskipTests -Dmaven.test.skip -Djetty.http.port=8989 clean jetty:run
     $ java -jar jetty-runner-9.4.6.v20170531.jar --port 8989 target/HackMeBooks.war
 
 Open the following URL : http://localhost:8989/login.jsp

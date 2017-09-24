@@ -16,11 +16,24 @@
         </property>
     </bean>
 
-    <!-- JNDI DataSource for J2EE environments -->
-    <!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
-    <!--<property name="jndiName"><value>java:comp/env/jdbc/HacmeBooks</value></property>-->
-    <!--</bean>-->
-    <jdbc:embedded-database id="dataSource" type="HSQL">
+    <!--JNDI DataSource for J2EE environments -->
+    <!--    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+            <property name="jndiName">
+                <value>java:comp/env/jdbc/HacmeBooks</value>
+            </property>
+        </bean>-->
+    <!--jdbc:embedded-database id="dataSource" type="HSQL">
         <jdbc:script location="classpath:data.sql"/>
-    </jdbc:embedded-database>
+    </jdbc:embedded-database-->
+
+    <bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+        <property name="url" value="jdbc:hsqldb:hsql://localhost/xdb"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:data.sql"/>
+    </jdbc:initialize-database>
 </beans>
