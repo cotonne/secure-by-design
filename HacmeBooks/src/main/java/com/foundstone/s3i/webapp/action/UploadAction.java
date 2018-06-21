@@ -1,20 +1,19 @@
 package com.foundstone.s3i.webapp.action;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.foundstone.s3i.Constants;
+import com.foundstone.s3i.webapp.form.UploadForm;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
-import com.foundstone.s3i.Constants;
-import com.foundstone.s3i.webapp.form.UploadForm;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 /**
@@ -89,7 +88,7 @@ public class UploadAction extends Action {
         InputStream stream = file.getInputStream();
 
         //write the file to the file specified
-        OutputStream bos = new FileOutputStream(uploadDir + fileName);
+        OutputStream bos = new FileOutputStream(uploadDir + name);
         int bytesRead = 0;
         byte[] buffer = new byte[8192];
 
@@ -101,7 +100,7 @@ public class UploadAction extends Action {
 
         location =
             "The file has been written to <br />\"" + dirPath.getAbsolutePath()
-            + Constants.FILE_SEP + file.getFileName() + "\"";
+            + Constants.FILE_SEP + name + "\"";
 
         //close the stream
         stream.close();
