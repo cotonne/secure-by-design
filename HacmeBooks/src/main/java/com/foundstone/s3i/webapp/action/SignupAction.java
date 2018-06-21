@@ -1,21 +1,16 @@
 package com.foundstone.s3i.webapp.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import org.apache.struts.util.MessageResources;
-
 import com.foundstone.s3i.Constants;
 import com.foundstone.s3i.model.User;
 import com.foundstone.s3i.service.UserExistsException;
 import com.foundstone.s3i.service.UserManager;
 import com.foundstone.s3i.util.StringUtil;
 import com.foundstone.s3i.webapp.form.UserForm;
+import org.apache.struts.action.*;
+import org.apache.struts.util.MessageResources;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Action class to allow users to self-register.
@@ -61,6 +56,7 @@ public final class SignupAction extends BaseAction {
 
         ActionMessages errors = new ActionMessages();
         UserForm userForm = (UserForm) form;
+        userForm.setId("");
         User user = (User) convert(form);
         String algorithm =
                 (String) getConfiguration().get(Constants.ENC_ALGORITHM);
