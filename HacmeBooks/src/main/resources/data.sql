@@ -36,6 +36,7 @@ INSERT INTO USERS VALUES(2,'testuser','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'
 INSERT INTO USERS VALUES(3,'foundstone','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','','Hacme','User','sales@foundstone.com','','no hints sorry')
 INSERT INTO ROLES VALUES(1, 'admin','admin role')
 INSERT INTO ROLES VALUES(2, 'tomcat','default role')
+INSERT INTO USER_ROLES VALUES(1,2)
 INSERT INTO USER_ROLES VALUES(2,2)
 INSERT INTO USER_ROLES VALUES(2,3)
 INSERT INTO PRODUCTS VALUES(735,'Hacking Exposed: Network Security Secrets & Solutions, Fourth Edition (Hacking Exposed)','This is a book without a description.',0,49.99E0,'Amazon','Technology','McGraw-Hill Osborne Media','0072227427','Stuart  McClure, Joel  Scambray, George  Kurtz','http://localhost:8989/images/books/0072227427.01._SCMZZZZZZZ_.jpg',0)
