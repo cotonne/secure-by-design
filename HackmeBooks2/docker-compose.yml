@@ -1,0 +1,25 @@
+version: '3'
+services:
+  back:
+    build: ./hackmebooks2-back
+    image: hackmebooks2-back:latest
+    ports:
+      - "8080:8080"
+  front:
+    build: ./hackmebooks2-front
+    image: hackmebooks2-front:latest
+    ports:
+      - "4200:4200"
+  reverse_proxy:
+    depends_on:
+      - back
+      - front
+    build: ./hackmebooks2-reverse
+    image: reverseproxy:latest
+    ports:
+      - "80:80" 
+    links:
+      - "back:back" 
+      - "front:front"
+
+
