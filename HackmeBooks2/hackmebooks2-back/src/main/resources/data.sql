@@ -3,8 +3,17 @@ SET WRITE_DELAY 0
 -- PASSWORD = test
 INSERT INTO USERS VALUES(2,'testuser','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','','Test','User','test@user.com','','My password hint')
 INSERT INTO USERS VALUES(3,'foundstone','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','','Hacme','User','sales@foundstone.com','','no hints sorry')
+
+INSERT INTO GROUPS
+VALUES (1, 'ADMIN')
+INSERT INTO GROUPS
+VALUES (2, 'USER')
+INSERT INTO GROUP_AUTHORITIES
+VALUES (2, 'USER_AUTHORITY')
+
 INSERT INTO ROLES VALUES(1, 'admin','admin role')
 INSERT INTO ROLES VALUES(2, 'tomcat','default role')
+
 INSERT INTO USER_ROLES VALUES(2,2)
 INSERT INTO USER_ROLES VALUES(2,3)
 INSERT INTO PRODUCTS VALUES(735,'Hacking Exposed: Network Security Secrets & Solutions, Fourth Edition (Hacking Exposed)','This is a book without a description.',0,49.99E0,'Amazon','Technology','McGraw-Hill Osborne Media','0072227427','Stuart  McClure, Joel  Scambray, George  Kurtz','/images/books/0072227427.01._SCMZZZZZZZ_.jpg',0)

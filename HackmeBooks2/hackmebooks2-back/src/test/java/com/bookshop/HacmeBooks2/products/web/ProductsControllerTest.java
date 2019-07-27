@@ -20,12 +20,11 @@ public class ProductsControllerTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Ignore
   @Test
   public void shouldListProducts() throws Exception {
     mockMvc.perform(get("/products"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$", hasSize(1)));
+            .andExpect(jsonPath("$.content", hasSize(20)));
   }
 
   @Test
