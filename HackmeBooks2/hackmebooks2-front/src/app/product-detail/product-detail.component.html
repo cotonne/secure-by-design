@@ -1,0 +1,53 @@
+<ng-container *ngIf="product$ | async as product">
+  <div class="booktitle">
+    {{product.title}}
+  </div>
+  <div class="bookdetails"><span style="font-weight: bold;">Author(s): </span>
+    {{product.author}}
+  </div>
+  <div class="bookdetails"><span style="font-weight: bold;">ISBN: </span>
+    {{product.isbn}}
+  </div>
+  <div class="bookdetails"><img alt="" src="{{product.imgUrl}}"/></div>
+</ng-container>
+
+<table mat-table [dataSource]="feedbacks$ | async">
+  <ng-container matColumnDef="content">
+    <th mat-header-cell *matHeaderCellDef>Customer Feedback for this Product</th>
+    <td mat-cell *matCellDef="let feedback">{{feedback.feedback}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+
+<div *ngIf="authenticationService.isAuthenticated(); else notConnected">
+  <div class="checkoutForm">
+    Leave Feedback
+  </div>
+  <form>
+    <div class="container">
+      <mat-form-field>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    property="feedback"
+                    class="feedback"
+                    cdkAutosizeMinRows="5"
+                    [ngModel]="feedback"
+                    placeholder="Leave a comment"
+                    name="feedback">
+          </textarea>
+      </mat-form-field>
+      <!-- TODO ERROR MGMT -->
+
+      <button mat-raised-button (click)="postFeedback()">
+        Submit Feedback
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #notConnected>
+  <div>
+    (You must be logged in to leave feedback)
+  </div>
+</ng-template>

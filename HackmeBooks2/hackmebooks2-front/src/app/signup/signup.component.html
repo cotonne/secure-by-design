@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title>Signup</mat-card-title>
+  <mat-card-content>
+    <div class="container">
+      <mat-form-field>
+        <input matInput placeholder="Username" [(ngModel)]="model.username">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" [(ngModel)]="model.password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Confirm Password" [(ngModel)]="model.password_confirmation">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="First Name" [(ngModel)]="model.first_name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" [(ngModel)]="model.last_name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="E-Mail" [(ngModel)]="model.email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Phone Number" [(ngModel)]="model.phone_number">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="SSN" [(ngModel)]="model.ssn">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password Hint" [(ngModel)]="model.password_hint">
+      </mat-form-field>
+    </div>
+    <div class="center">
+      <button mat-raised-button>Cancel</button>
+      <button mat-raised-button (click)="signup()">Signup</button>
+    </div>
+  </mat-card-content>
+</mat-card>

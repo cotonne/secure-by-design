@@ -1,0 +1,65 @@
+<span *ngIf="(user$ | async).isAdmin; else elseNormalUserBlock">
+You can update this user's information using the form below.
+</span>
+<ng-template #elseNormalUserBlock>
+<span>
+  Please update your information using the form below.
+</span>
+</ng-template>
+
+
+<form>
+  <div class="center">
+    <button mat-raised-button>Save</button>
+    <button *ngIf="(user$ | async).isAdmin" mat-raised-button>Delete</button>
+    <button mat-raised-button>Cancel</button>
+  </div>
+  <div class="container">
+    <mat-form-field>
+      <input matInput placeholder="Username" name="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" name="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" name="confirmPassword">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="First Name" name="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" name="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" name="address">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="City" name="city">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Country" name="country">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="E-Mail" name="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" name="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="WebSite" name="website">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="SSN" name="ssn">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password Hint">
+    </mat-form-field>
+    <div *ngIf="(user$ | async).isAdmin">
+      <div *ngFor="let role of (roles$ | async) ">
+        <mat-form-field>
+          <mat-checkbox name="role-{{role.id}}">{{role.label}}</mat-checkbox>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>

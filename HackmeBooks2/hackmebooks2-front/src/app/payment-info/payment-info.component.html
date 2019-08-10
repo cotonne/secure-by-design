@@ -1,0 +1,40 @@
+<form [formGroup]="paymentFormGroup">
+  <div class="container">
+    <div>
+      <p> Please select payment method and account number:</p>
+      <mat-radio-group
+        aria-label="Please select payment method and account number:"
+        formControlName="paymentType"
+        required
+      >
+        <mat-radio-button value="CARD">Card</mat-radio-button>
+        <mat-radio-button value="ACCOUNT">Account number</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="paymentType === 'CARD'; else bankAccountBlock">
+      <mat-form-field>
+        <input matInput placeholder="Credit Card Number" formControlName="creditCardNumber">
+        <!-- TODO cf. https://material.angular.io/components/form-field/overview#floating-label -->
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Expiration (MM-YY)">
+      </mat-form-field>
+    </div>
+    <ng-template #bankAccountBlock>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Bank Account Number">
+        </mat-form-field>
+      </div>
+    </ng-template>
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Promotional Code">
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button matStepperPrevious>< Cancel</button>
+      <button mat-raised-button matStepperNext class="main-button">Purchase ></button>
+    </div>
+  </div>
+</form>

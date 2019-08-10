@@ -1,0 +1,14 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Summary</ng-template>
+    <app-shopping-cart></app-shopping-cart>
+  </mat-step>
+  <mat-step [completed]="paymentInformationCompleted | async">
+    <ng-template matStepLabel>Payment</ng-template>
+    <app-payment-info (validate)="validate()"></app-payment-info>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Receipt</ng-template>
+    <app-receipt></app-receipt>
+  </mat-step>
+</mat-horizontal-stepper>

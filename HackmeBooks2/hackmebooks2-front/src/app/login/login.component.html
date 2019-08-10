@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form>
+      <div class="container">
+        <mat-form-field>
+          <input matInput placeholder="Username"
+                 [formControl]="username"
+                 required>
+          <mat-error *ngIf="username.invalid">{{getErrorMessage('username')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" [formControl]="password" required>
+          <mat-error *ngIf="password.invalid">{{getErrorMessage('password')}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="center">
+        <button mat-raised-button (click)="login()">Connect</button>
+      </div>
+    </form>
+    <div>
+      <div>
+        Not a member? <a href="signup">Signup for an account.</a>
+      </div>
+      <div>
+        <a href="forgot-your-password">Forgot your password?</a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

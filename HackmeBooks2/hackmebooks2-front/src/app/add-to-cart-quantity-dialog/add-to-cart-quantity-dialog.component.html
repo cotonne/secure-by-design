@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{data.product.title}}</h1>
+<div mat-dialog-content>
+  <p>I want...</p>
+  <mat-form-field>
+
+    <input matInput autofocus [(ngModel)]="data.quantity" value="1">
+
+  </mat-form-field>
+  <p>of this book!</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add to cart</button>
+</div>

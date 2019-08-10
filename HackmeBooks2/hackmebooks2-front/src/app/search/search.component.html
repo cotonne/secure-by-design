@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-title>Search books</mat-card-title>
+  <mat-card-content>
+    <div>
+      <form>
+        <div class="container">
+          <mat-form-field>
+            <input matInput placeholder="Search" value="Writing secure code..." [(ngModel)]="model" name="search">
+          </mat-form-field>
+        </div>
+        <div class="right">
+          <button mat-raised-button (click)="search()">Search</button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

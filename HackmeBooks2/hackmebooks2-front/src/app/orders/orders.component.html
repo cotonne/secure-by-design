@@ -1,0 +1,26 @@
+<table mat-table [dataSource]="orders$ | async">
+  <ng-container matColumnDef="order_number">
+    <th mat-header-cell *matHeaderCellDef>Order Number</th>
+    <td mat-cell *matCellDef="let order"></td>
+  </ng-container>
+  <ng-container matColumnDef="credit_card_number">
+    <th mat-header-cell *matHeaderCellDef>Credit Card number</th>
+    <td mat-cell *matCellDef="let order"></td>
+  </ng-container>
+  <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef>Item</th>
+    <td mat-cell *matCellDef="let order"></td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let order"> {{product.price}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+<mat-paginator
+  [length]="length$ | async"
+  [pageSizeOptions]="[5]"
+  showFirstLastButtons
+  (page)="onPaging($event)">
+</mat-paginator>

@@ -1,0 +1,23 @@
+<script>
+  function myFunction(x) {
+    x.classList.toggle("change");
+  }
+</script>
+<button mat-button [matMenuTriggerFor]="beforeMenu">
+  <mat-icon>
+    <!-- from https://www.w3schools.com/howto/howto_css_menu_icon.asp -->
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+  </mat-icon>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <a href="/login" *ngIf="!(authenticationService.isAuthenticated())" mat-menu-item>Login</a>
+  <a href="/products" mat-menu-item>Browse Books</a>
+  <a href="/my-orders" *ngIf="(authenticationService.isAuthenticated())" mat-menu-item>My
+    Orders</a>
+  <a href="/view-cart" *ngIf="(authenticationService.isAuthenticated())" mat-menu-item>View
+    Cart</a>
+  <a href="/check-out" *ngIf="(authenticationService.isAuthenticated())" mat-menu-item>Check
+    Out</a>
+</mat-menu>

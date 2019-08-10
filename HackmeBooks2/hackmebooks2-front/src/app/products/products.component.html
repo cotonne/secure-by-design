@@ -1,0 +1,26 @@
+<table mat-table [dataSource]="products$ | async">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title</th>
+    <td mat-cell *matCellDef="let product"><a [routerLink]="['/product', product.id]">{{product.title}} </a></td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price</th>
+    <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+  </ng-container>
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef> Add</th>
+    <td mat-cell *matCellDef="let product">
+      <button (click)="addToCart(product)">
+        Add to cart
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
+<mat-paginator
+  [length]="length$ | async"
+  [pageSizeOptions]="[5]"
+  showFirstLastButtons
+  (page)="onPaging($event)">
+</mat-paginator>
