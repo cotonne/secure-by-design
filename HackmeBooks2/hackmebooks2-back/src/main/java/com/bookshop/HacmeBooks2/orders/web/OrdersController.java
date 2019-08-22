@@ -1,18 +1,21 @@
 package com.bookshop.HacmeBooks2.orders.web;
 
-import com.bookshop.HacmeBooks2.orders.model.*;
-import com.bookshop.HacmeBooks2.orders.service.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.web.bind.annotation.*;
+import com.bookshop.HacmeBooks2.orders.model.Order;
+import com.bookshop.HacmeBooks2.orders.service.OrdersService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.security.*;
-import java.util.*;
+import java.security.Principal;
+import java.util.Set;
 
 @RestController
 public class OrdersController {
 
-  @Autowired
-  public OrdersService service;
+  public final OrdersService service;
+
+  public OrdersController(OrdersService service) {
+    this.service = service;
+  }
 
   @GetMapping("/orders")
   public Set<Order> getOrders(Principal principal){

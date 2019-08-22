@@ -1,18 +1,21 @@
 package com.bookshop.HacmeBooks2.products.service;
 
-import com.bookshop.HacmeBooks2.products.model.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.jdbc.core.*;
-import org.springframework.stereotype.*;
+import com.bookshop.HacmeBooks2.products.model.Product;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
-import java.sql.*;
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
 
 @Service
 public class SearchService {
-  @Autowired
-  private JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
+
+  public SearchService(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
 
   public List<Product> search(String query) {
     String[] keywords = createSearchCriteria(query);

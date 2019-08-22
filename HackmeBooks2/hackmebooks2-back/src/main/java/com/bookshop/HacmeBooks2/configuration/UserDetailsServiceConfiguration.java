@@ -1,6 +1,5 @@
 package com.bookshop.HacmeBooks2.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -9,8 +8,11 @@ import javax.sql.DataSource;
 
 @Configuration
 public class UserDetailsServiceConfiguration {
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    public UserDetailsServiceConfiguration(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Bean
     public JdbcUserDetailsManager userDetailsService() {

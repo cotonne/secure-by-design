@@ -2,7 +2,6 @@ package com.bookshop.HacmeBooks2.users.service;
 
 import com.bookshop.HacmeBooks2.users.model.User;
 import com.bookshop.HacmeBooks2.users.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
@@ -11,11 +10,14 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private JdbcUserDetailsManager manager;
+    private final JdbcUserDetailsManager manager;
+
+    public UserService(UserRepository userRepository, JdbcUserDetailsManager manager) {
+        this.userRepository = userRepository;
+        this.manager = manager;
+    }
 
     public Optional<Object> signup(User user) {
         try{

@@ -3,19 +3,24 @@ package com.bookshop.HacmeBooks2.users.web;
 import com.bookshop.HacmeBooks2.users.model.User;
 import com.bookshop.HacmeBooks2.users.service.UserService;
 import com.bookshop.HacmeBooks2.users.web.dto.SignupDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.security.*;
+import java.security.Principal;
 
 @RestController
 public class UserController {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
+
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
   @GetMapping("/user")
   Principal getUser(Principal user) {

@@ -1,22 +1,29 @@
 package com.bookshop.HacmeBooks2.products.web;
 
-import com.bookshop.HacmeBooks2.products.model.*;
-import com.bookshop.HacmeBooks2.products.repository.*;
-import com.bookshop.HacmeBooks2.products.service.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.data.domain.*;
-import org.springframework.web.bind.annotation.*;
+import com.bookshop.HacmeBooks2.products.model.Product;
+import com.bookshop.HacmeBooks2.products.repository.ProductRepository;
+import com.bookshop.HacmeBooks2.products.service.SearchService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProductsController {
 
-  @Autowired
-  private ProductRepository repository;
+  private final ProductRepository repository;
 
-  @Autowired
-  private SearchService searchService;
+  private final SearchService searchService;
+
+  public ProductsController(ProductRepository repository, SearchService searchService) {
+    this.repository = repository;
+    this.searchService = searchService;
+  }
 
   @GetMapping("/products")
   public Page<Product> list(Pageable pageable) {

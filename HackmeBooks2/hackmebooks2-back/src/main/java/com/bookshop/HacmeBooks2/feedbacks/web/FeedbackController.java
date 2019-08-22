@@ -1,20 +1,27 @@
 package com.bookshop.HacmeBooks2.feedbacks.web;
 
-import com.bookshop.HacmeBooks2.feedbacks.model.*;
-import com.bookshop.HacmeBooks2.feedbacks.service.*;
-import com.bookshop.HacmeBooks2.feedbacks.web.dto.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+import com.bookshop.HacmeBooks2.feedbacks.model.Feedback;
+import com.bookshop.HacmeBooks2.feedbacks.service.FeedbackService;
+import com.bookshop.HacmeBooks2.feedbacks.web.dto.FeedbackDTO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.*;
-import java.util.*;
+import java.net.URI;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class FeedbackController {
 
-  @Autowired
-  private FeedbackService service;
+  private final FeedbackService service;
+
+  public FeedbackController(FeedbackService service) {
+    this.service = service;
+  }
 
   @GetMapping("/feedbacks")
   public Set<Feedback> list(@RequestParam("product_id") Integer productId) {
