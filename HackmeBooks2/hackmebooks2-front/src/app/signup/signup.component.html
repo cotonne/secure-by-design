@@ -1,38 +1,68 @@
-<mat-card>
-  <mat-card-title>Signup</mat-card-title>
-  <mat-card-content>
-    <div class="container">
-      <mat-form-field>
-        <input matInput placeholder="Username" [(ngModel)]="model.username">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" [(ngModel)]="model.password">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Confirm Password" [(ngModel)]="model.password_confirmation">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="First Name" [(ngModel)]="model.first_name">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Last Name" [(ngModel)]="model.last_name">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="E-Mail" [(ngModel)]="model.email">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Phone Number" [(ngModel)]="model.phone_number">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="SSN" [(ngModel)]="model.ssn">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password Hint" [(ngModel)]="model.password_hint">
-      </mat-form-field>
-    </div>
-    <div class="center">
-      <button mat-raised-button>Cancel</button>
-      <button mat-raised-button (click)="signup()">Signup</button>
-    </div>
-  </mat-card-content>
-</mat-card>
+<div [formGroup]="form">
+  <mat-card>
+    <mat-card-title>Signup</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <mat-form-field>
+          <input matInput placeholder="Username" formControlName="username">
+          <mat-error *ngIf="form.get('username').invalid">
+            Username is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" type="password"
+                 formControlName="password">
+          <mat-error *ngIf="form.get('password').invalid">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Confirm Password" type="password"
+                 formControlName="password_confirmation">
+          <mat-error *ngIf="form.get('password_confirmation').hasError('required')">
+            Confirmation is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="form.hasError('mismatch')">
+            Password and confirmation password must be <strong>equal</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="First Name"
+                 formControlName="first_name">
+          <mat-error *ngIf="form.get('first_name').invalid">
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="last_name">
+          <mat-error *ngIf="form.get('last_name').invalid">
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="E-Mail" type="email"
+                 formControlName="email">
+          <mat-error *ngIf="form.get('email').hasError('email') && !form.get('email').hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="form.get('email').hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Phone Number" type="tel" formControlName="phone_number">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="SSN" formControlName="ssn">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password Hint (Your grand-mother first name)" formControlName="password_hint">
+        </mat-form-field>
+      </div>
+      <div class="center">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button (click)="signup()" [disabled]="!form.valid">Signup</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
