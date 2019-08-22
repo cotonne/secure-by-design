@@ -5,13 +5,13 @@
   </ng-container>
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef> Price</th>
-    <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+    <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
   </ng-container>
-  <ng-container matColumnDef="add">
+  <ng-container matColumnDef="add" >
     <th mat-header-cell *matHeaderCellDef> Add</th>
     <td mat-cell *matCellDef="let product">
-      <button (click)="addToCart(product)">
-        Add to cart
+      <button (click)="addToCart(product)" *ngIf="authenticationService.isAuthenticated()">
+        <i class="material-icons">shopping_basket</i>
       </button>
     </td>
   </ng-container>

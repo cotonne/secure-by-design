@@ -6,6 +6,7 @@ import {ProductService} from '../product.service';
 import {AddToCartQuantityDialogComponent} from '../add-to-cart-quantity-dialog/add-to-cart-quantity-dialog.component';
 import {OrderLine} from '../model/order-line';
 import {CartService} from '../cart.service';
+import {AuthenticationService} from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private service: ProductService,
+    private authenticationService: AuthenticationService,
     private dialog: MatDialog) {
   }
 
