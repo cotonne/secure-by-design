@@ -1,3 +1,5 @@
+import {Feedback} from './feedback';
+
 export class Product {
   id = 0;
   title: string;
@@ -11,4 +13,5 @@ export class Product {
   author: string;
   quantity = 0;
   imgUrl: string;
+  feedback: Feedback[];
 }

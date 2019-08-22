@@ -24,6 +24,10 @@ import { AddToCartQuantityDialogComponent } from './add-to-cart-quantity-dialog/
 import { PaymentInfoComponent } from './payment-info/payment-info.component';
 import { MenuComponent } from './menu/menu.component';
 import { PaymentTunnelComponent } from './payment-tunnel/payment-tunnel.component';
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en';
+
+registerLocaleData(localeEn, 'us');
 
 @NgModule({
   declarations: [
