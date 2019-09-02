@@ -1,0 +1,17 @@
+{
+  "summary": {
+    "title": "Threat model",
+    "owner": "Cotonne"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "DFD",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
+    "reviewer": "Nope"
+  }
+}
