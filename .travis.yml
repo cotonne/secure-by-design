@@ -1,13 +1,26 @@
+dist: trusty
+
 matrix:
   include:
-    - language: java
-      openjdk: 11
-      before_script:
-        - cd HackmeBooks2/hackmebooks2-back/
-    - language: node_js
-      node_js:
-        - 10
-      before_script:
-        - cd HackmeBooks2/hackmebooks2-front/
-        - npm install
+  - language: java
+    openjdk: 11
+    before_script:
+    - cd HackmeBooks2/hackmebooks2-back/
+    script:
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=cotonne_secure-by-design
+  - language: node_js
+    node_js:
+    - 10
+    before_script:
+    - cd HackmeBooks2/hackmebooks2-front/
+    - npm install
+    script:
+    - sonar-scanner
+
+
+addons:
+  sonarcloud:
+    organization: "cotonne-github"
+    token:
+      secure: "HmHCz2NMOSTL64WnrM2YO4CXKbhRCgH/5AbcB7KGe3G7puttTjMOkNBsqcq71sDnLZlBIFTnZ9HSKUafF1UDPII3iQiwuDFNsudRoDA6NIdlSKNViwwlGiB7rUL2o1OVg1MUfyCJjtnGZUTkOppSUlD9uo9i3xn0BUBB7pmHr9qvgY01oNXLJZaRQWS962FBGe4b85JruWpUk8ymkt0pQ0jw3jUKYEukKOieEpCZLD840vLPwpakJPGSJLCRaxa1EEMAoGtu1Z5iojqCwTHn8DSGtM6c0GFvlrSx2rXPOFGsZk+YTiJ3FuyZf5C1AvWeDYoMm5GwKloBOvgju2YoYdgoXfuyR4jrJbFzXRxkCnYgH8xUA13BE5xLJtymw+Bl1bfj/if7DaNB0pT90FgVsfpdBr0rJ/RBLKzpNCAofzADrP3OKMbXPOrlGoYmKxvXvPJeSSdBy5Y3ApR92gSVYhy9be/gj7PvkaTM2ASs8AEj+81zcGVVNPiXHWi7EfZVT3r1MHeFkBJKrUq9MRVXcoWw6gFxRMI0C5OE5P7HPX8ghHqNjoFyyzzHBubapIZjUXF2gDXqFoNPQJcBecy6aHIq6BGwU/z/A3GxRMR7JU8hFlrN5HMxy1s32bc7ix6vp8Db6vnCUqtq1m7W7q3gMZaqqlPu0LsjRWXPkGT9ILE="
 
