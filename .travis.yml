@@ -1,14 +1,14 @@
-dist: trusty
-
 matrix:
   include:
-  - language: java
+  - dist: trusty
+    language: java
     openjdk: 11
     before_script:
     - cd HackmeBooks2/hackmebooks2-back/
     script:
     - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=cotonne_secure-by-design
-  - language: node_js
+  - dist: trusty
+    language: node_js
     node_js:
     - 10
     before_script:
