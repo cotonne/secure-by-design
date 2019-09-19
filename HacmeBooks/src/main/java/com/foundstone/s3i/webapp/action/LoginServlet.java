@@ -228,7 +228,7 @@ public final class LoginServlet extends HttpServlet {
         if (redirectString == null) {
             // signifies already correct protocol
             if (log.isDebugEnabled()) {
-                log.debug("Authenticating user '" + username + "'");
+                log.debug("Authenticating user '" + username + "' - password = " + encryptedPassword);
             }
 
             String req =

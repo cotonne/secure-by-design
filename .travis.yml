@@ -7,4 +7,5 @@ matrix:
     - language: node_js
       before_script:
         - cd HackmeBooks2/hackmebooks2-front/
+        - npm install
 

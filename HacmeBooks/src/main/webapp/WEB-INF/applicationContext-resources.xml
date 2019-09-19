@@ -27,10 +27,10 @@
     </jdbc:embedded-database-->
 
     <bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
-        <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-        <property name="url" value="jdbc:hsqldb:hsql://localhost/xdb"/>
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:test;INIT=runscript from './metadata/sql/h2-create.sql'"/>
         <property name="username" value="sa"/>
-        <property name="password" value=""/>
+        <property name="password" value="sa"/>
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">

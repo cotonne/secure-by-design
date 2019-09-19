@@ -5,10 +5,10 @@
         <Arg></Arg>
         <Arg>jdbc/HacmeBooks</Arg>
         <Arg>
-            <New class="org.hsqldb.jdbc.JDBCDataSource">
-                <Set name="Url">jdbc:hsqldb:hsql://localhost/xdb</Set>
+            <New class="org.h2.jdbcx.JdbcDataSource">
+                <Set name="Url">jdbc:h2:mem:test;INIT=runscript from './metadata/sql/h2-create.sql'</Set>
                 <Set name="User">sa</Set>
-                <Set name="Password" type="String"></Set>
+                <Set name="Password" type="String">sa</Set>
             </New>
         </Arg>
     </New>
