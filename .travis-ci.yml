@@ -1,0 +1,10 @@
+matrix:
+  include:
+    - language: java
+      openjdk: 11
+      before_script:
+        - cd HackmeBooks2/hackmebooks2-back/
+    - language: node_js
+      before_script:
+        - cd HackmeBooks2/hackmebooks2-front/
+
