@@ -2,7 +2,8 @@ matrix:
   include:
   - dist: trusty
     language: java
-    openjdk: 11
+    jdk: 
+      - openjdk11
     before_script:
     - cd HackmeBooks2/hackmebooks2-back/
     script:
