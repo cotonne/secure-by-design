@@ -7,7 +7,7 @@ matrix:
     before_script:
     - cd HackmeBooks2/hackmebooks2-back/
     script:
-    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=cotonne_secure-by-design
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=cotonne_secure-by-design-back
   - dist: trusty
     language: node_js
     node_js:
