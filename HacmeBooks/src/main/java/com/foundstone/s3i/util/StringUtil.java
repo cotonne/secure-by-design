@@ -1,7 +1,9 @@
 package com.foundstone.s3i.util;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,8 +84,7 @@ public class StringUtil {
      * @return String
      */
     public static String encodeString(String str)  {
-        sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
-        return encoder.encodeBuffer(str.getBytes()).trim();
+        return Base64.getEncoder().encodeToString(str.getBytes());
     }
 
     /**
@@ -93,11 +94,6 @@ public class StringUtil {
      * @return String
      */
     public static String decodeString(String str) {
-        sun.misc.BASE64Decoder dec = new sun.misc.BASE64Decoder();
-        try {
-            return new String(dec.decodeBuffer(str));
-        } catch (IOException io) {
-        	throw new RuntimeException(io.getMessage(), io.getCause());
-        }
+        return new String(Base64.getDecoder().decode(str), StandardCharsets.US_ASCII);
     }
 }
