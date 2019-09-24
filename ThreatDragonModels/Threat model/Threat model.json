@@ -19,8 +19,8 @@
                 "height": 80
               },
               "position": {
-                "x": 50,
-                "y": 50
+                "x": 46,
+                "y": 37
               },
               "angle": 0,
               "id": "32d8d665-36f3-4263-a1cb-12c8908de945",
@@ -72,22 +72,32 @@
                 "height": 100
               },
               "position": {
-                "x": 435,
-                "y": 39
+                "x": 450,
+                "y": 62
               },
               "angle": 0,
               "id": "57767163-861c-43b2-bb09-35e0f8bb615e",
               "z": 3,
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "SQL Injection",
+                  "type": "Information disclosure",
+                  "description": "Les CB  sont stockées en clair en base, si un attaquant arriver à exploiter une faille de type SQLi, il peut peut récupérer les numéros de CB",
+                  "mitigation": "- Prochaine CR : vérifier que les prepared statements\n- Chiffrer les numéros de carte bleues\n- Echappement/validation des données qui sont utilisées dans la requête\n- Isolation: Avoir une autre application qui gère les CB dans un autre domaine"
+                }
+              ],
               "attrs": {
                 ".element-shape": {
-                  "class": "element-shape hasNoOpenThreats isInScope"
+                  "class": "element-shape hasOpenThreats isInScope"
                 },
                 "text": {
-                  "text": "HacmeBook\nApp"
+                  "text": "nginx"
                 },
                 ".element-text": {
-                  "class": "element-text hasNoOpenThreats isInScope"
+                  "class": "element-text hasOpenThreats isInScope"
                 }
               }
             },
@@ -100,7 +110,12 @@
               "target": {
                 "id": "57767163-861c-43b2-bb09-35e0f8bb615e"
               },
-              "vertices": [],
+              "vertices": [
+                {
+                  "x": 234,
+                  "y": 92
+                }
+              ],
               "id": "54cb48d5-bc71-46d2-adf1-985e816bffb5",
               "labels": [
                 {
@@ -119,7 +134,7 @@
               "isPublicNetwork": true,
               "threats": [
                 {
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Medium",
                   "title": "Insecure communication",
                   "type": "Tampering",
@@ -173,7 +188,7 @@
               "type": "tm.Flow",
               "smooth": true,
               "source": {
-                "id": "57767163-861c-43b2-bb09-35e0f8bb615e"
+                "id": "a95066f8-e197-4b34-9190-f9b2790432a0"
               },
               "target": {
                 "id": "7641d98a-ea7f-44c4-b9d8-cfc1f47b4f1e"
@@ -196,6 +211,8 @@
               "hasOpenThreats": false,
               "isPublicNetwork": false,
               "threats": [],
+              "protocol": "HTTP",
+              "isEncrypted": false,
               "attrs": {
                 ".marker-target": {
                   "class": "marker-target hasNoOpenThreats isInScope"
@@ -204,6 +221,205 @@
                   "class": "connection hasNoOpenThreats isInScope"
                 }
               }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 441,
+                "y": 3
+              },
+              "target": {
+                "x": 462,
+                "y": 285
+              },
+              "vertices": [
+                {
+                  "x": 433,
+                  "y": 39
+                },
+                {
+                  "x": 396,
+                  "y": 88
+                },
+                {
+                  "x": 395,
+                  "y": 178
+                }
+              ],
+              "id": "387cac9e-c0f5-464e-aefd-15fe392a1787",
+              "z": 7,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "1d74915d-4fe8-43d3-9782-5a37d0424811"
+              },
+              "target": {
+                "id": "a95066f8-e197-4b34-9190-f9b2790432a0"
+              },
+              "vertices": [],
+              "id": "eb15e197-3bf9-4f40-8d4c-c19db74e855f",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Ordre",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 10,
+              "hasOpenThreats": false,
+              "isEncrypted": true,
+              "isPublicNetwork": true,
+              "protocol": "HTTPS",
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Le produit est acheté avec un compte volé",
+                  "type": "Spoofing",
+                  "description": "- Responsibilité",
+                  "mitigation": "- Définir des limites d'achats?\n- Vérifier la réputation de l'IP et interdire tout ce qui n'est pas du territoire FR?"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 566,
+                "y": 320
+              },
+              "angle": 0,
+              "id": "1d74915d-4fe8-43d3-9782-5a37d0424811",
+              "z": 11,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Paypal"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 851,
+                "y": 266
+              },
+              "target": {
+                "x": 448,
+                "y": 334
+              },
+              "vertices": [
+                {
+                  "x": 637,
+                  "y": 239
+                }
+              ],
+              "id": "bf29f23e-6cbe-4a45-99d6-fa61910ac0f8",
+              "z": 12,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 640,
+                "y": 42
+              },
+              "angle": 0,
+              "id": "a95066f8-e197-4b34-9190-f9b2790432a0",
+              "z": 13,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "WAS"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "smooth": true,
+              "source": {
+                "id": "57767163-861c-43b2-bb09-35e0f8bb615e"
+              },
+              "target": {
+                "id": "a95066f8-e197-4b34-9190-f9b2790432a0"
+              },
+              "vertices": [],
+              "id": "4f8425f3-cd98-4b10-b07d-673834059d4a",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 14,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "smooth": true,
+              "source": {
+                "x": 609,
+                "y": 11
+              },
+              "target": {
+                "x": 589,
+                "y": 235
+              },
+              "vertices": [],
+              "id": "f7ce3123-4b77-46f4-b013-942143d4d4ca",
+              "z": 15,
+              "attrs": {}
             }
           ]
         },
